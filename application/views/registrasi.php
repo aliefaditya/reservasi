@@ -154,8 +154,8 @@ $(document).ready(function(){
         <div class="navbar-nav">
         <a class="nav-item nav-link" href="<?php echo base_url('user')?>">Home<span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('registrasi')?>">Registrasi</a>
-        <a class="nav-item nav-link" href="#">Informasi</a>
-        <a class="nav-item nav-link" href="#">About</a>
+        <a class="nav-item nav-link" href="<?php echo base_url('informasi')?>">Informasi</a>
+        <a class="nav-item nav-link" href="<?php echo base_url('about')?>">About</a>
         <a class="nav-item nav-link" href="<?php echo base_url('login/logout'); ?>">Logout</a>
         </div>
     </div>
@@ -170,7 +170,7 @@ $(document).ready(function(){
                     <div class="col-sm-6">
                         <div class="search-box">
 							<div class="input-group">								
-								<input type="text" id="search" class="form-control" placeholder="Search by Name">
+								<input type="text" id="search" class="form-control" placeholder="Search by Patient Name">
                                 <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
 							</div>
                         </div>
@@ -181,39 +181,26 @@ $(document).ready(function(){
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Nama Pasien</th>
                         <th style="width: 22%;">Rumah Sakit</th>
-                        <th style="width: 22%;">Alamat</th>
-                        <th>Kota</th>
                         <th>Poli</th>
                         <th>Antrean</th>
                     </tr>
                 </thead>
+                <?php
+                    $no = 1;
+                    foreach($antrean as $u){
+                ?>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Harapan Kita</td>
-                        <td>Slipi Raya</td>
-                        <td>Jakarta Barat</td>
-                        <td>Jantung</td>
-                        <td>20</td>
+                        <td> <?php echo $no++ ?> </td>
+                        <td> <?php echo $u->nama_lengkap ?> </td>
+                        <td> <?php echo $u->nama_rs ?> </td>
+                        <td> <?php echo $u->poli ?> </td>
+                        <td> <?php echo $u->no_antrean ?> </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Darmais</td>
-                        <td>Slipi Raya</td>
-                        <td>Jakarta Barat</td>
-                        <td>Kanker Hati</td>
-                        <td>101</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Darmais</td>
-                        <td>Slipi Raya</td>
-                        <td>Jakarta Barat</td>
-                        <td>Kanker Otak</td>
-                        <td>95</td>
-                    </tr>      
                 </tbody>
+                <?php } ?>
             </table>
         </div>
 
@@ -225,36 +212,91 @@ $(document).ready(function(){
 					</div>
                 </div>
             </div>
-            <form>
+            <form action="<?php echo site_url('registrasi/save_antrean');?>" method="post">>
                 <div class="form-group">
                     <label for="nama_lengkap">Nama Lengkap</label>
-                    <input type="text" class="form-control" id="nama_lengkap" placeholder="Fullname">
+                    <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Fullname">
                 </div>
                 <div class="form-group">
                     <label for="rumah_sakit">Rumah Sakit</label>
-                    <select class="form-control" id="rumah_sakit">
-                        <option>Harapan Kita</option>
-                        <option>Darmais</option>
-                        <option>Tarakan</option>
+                    <select class="form-control" name="rumah_sakit" id="rumah_sakit" required>
+                        <option value="">No Selected</option>
+                        <?php foreach($rumah_sakit as $row):?>
+                        <option value="<?php echo $row->nama_rs;?>"><?php echo $row->nama_rs;?></option>
+                        <?php endforeach;?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="poli">Poli</label>
-                    <select class="form-control" id="rumah_sakit">
-                        <option>Umum</option>
-                        <option>Jantung</option>
-                        <option>Kanker</option>
+                    <select class="form-control" name="poli" id="poli" required>
+                        <option value="">No Selected</option>
+                        <?php foreach($poli as $row):?>
+                        <option value="<?php echo $row->nama_poli;?>"><?php echo $row->nama_poli;?></option>
+                        <?php endforeach;?>
                     </select>
                 </div>
                 <div class="form-group row">
                     <label for="antrean" class="col-sm-2 col-form-label">No Antrean</label>
                     <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="21">
+                        <input type="number" class="form-control-plaintext" id="no_antrean" name="no_antrean">
                     </div>
                 </div>
+                <?php
+                    if (empty($_POST["nama_lengkap"])) {
+                        $pesanerror = "Semua field harus diisi";
+                    }
+                ?>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-    </div>     
+    </div>  
+    <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-3.3.1.js'?>"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+ 
+            $('#rumah_sakit').change(function(){ 
+                var id=$(this).val();
+                $.ajax({
+                    url : "<?php echo site_url('informasi/get_sub_rs');?>",
+                    method : "POST",
+                    data : {id: id_rs},
+                    async : true,
+                    dataType : 'json',
+                    success: function(data){
+                        var html = '';
+                        var i;
+                        for(i=0; i<data.length; i++){
+                            html += '<option value='+data[i].id_rs+'>'+data[i].nama_rs+'</option>';
+                        }
+                        $('#rumah_sakit').html(html);
+                    }
+                });
+                return false;
+            }); 
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#poli').change(function(){ 
+                var id=$(this).val();
+                $.ajax({
+                    url : "<?php echo site_url('informasi/get_sub_poli');?>",
+                    method : "POST",
+                    data : {id: id_poli},
+                    async : true,
+                    dataType : 'json',
+                    success: function(data){
+                        var html = '';
+                        var i;
+                        for(i=0; i<data.length; i++){
+                            html += '<option value='+data[i].id_poli+'>'+data[i].nama_poli+'</option>';
+                        }
+                        $('#poli').html(html);
+                    }
+                });
+                return false;
+            }); 
+        });
+    </script>     
 </body>
 </html>                                		                                                        

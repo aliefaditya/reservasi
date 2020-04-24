@@ -153,28 +153,21 @@ $(document).ready(function(){
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
         <a class="nav-item nav-link" href="<?php echo base_url('user')?>">Home<span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('registrasi')?>">Registrasi</a>
-        <a class="nav-item nav-link" href="#">Informasi</a>
+        <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Registrasi</a>
+        <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('informasi')?>">Informasi</a>
         <a class="nav-item nav-link" href="#">About</a>
         <a class="nav-item nav-link" href="<?php echo base_url('login/logout'); ?>">Logout</a>
         </div>
     </div>
     </nav>
 	<div class="container">
+        <!-- Daftar Rumah Sakit --> 
         <div class="table-wrapper">			
             <div class="table-title">
                 <div class="row">
 					<div class="col-sm-6">
-						<h2>Reservation <b>Details</b></h2>
+						<h2>Informasi <b>Rumah Sakit</b></h2>
 					</div>
-                    <div class="col-sm-6">
-                        <div class="search-box">
-							<div class="input-group">								
-								<input type="text" id="search" class="form-control" placeholder="Search by Name">
-                                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-							</div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <table class="table table-striped">
@@ -184,36 +177,23 @@ $(document).ready(function(){
                         <th style="width: 22%;">Rumah Sakit</th>
                         <th style="width: 22%;">Alamat</th>
                         <th>Kota</th>
-                        <th>Poli</th>
-                        <th>Antrean</th>
+                        <th>Jam</th>
                     </tr>
                 </thead>
+                <?php
+                    $no = 1;
+                    foreach($rumah_sakit as $u){
+                ?>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Harapan Kita</td>
-                        <td>Slipi Raya</td>
-                        <td>Jakarta Barat</td>
-                        <td>Jantung</td>
-                        <td>20</td>
+                        <td> <?php echo $no++ ?> </td>
+                        <td> <?php echo $u->nama_rs ?> </td>
+                        <td> <?php echo $u->alamat ?> </td>
+                        <td> <?php echo $u->kota ?> </td>
+                        <td> <?php echo $u->jam_operasional ?> </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Darmais</td>
-                        <td>Slipi Raya</td>
-                        <td>Jakarta Barat</td>
-                        <td>Kanker Hati</td>
-                        <td>101</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Darmais</td>
-                        <td>Slipi Raya</td>
-                        <td>Jakarta Barat</td>
-                        <td>Kanker Otak</td>
-                        <td>95</td>
-                    </tr>      
                 </tbody>
+                <?php } ?>
             </table>
         </div>
 
@@ -221,39 +201,70 @@ $(document).ready(function(){
             <div class="table-title">
                 <div class="row">
 					<div class="col-sm-6">
-						<h2>Reservation <b>Form</b></h2>
-					</div>
-                </div>
-            </div>
-            <form>
-                <div class="form-group">
-                    <label for="nama_lengkap">Nama Lengkap</label>
-                    <input type="text" class="form-control" id="nama_lengkap" placeholder="Fullname">
-                </div>
-                <div class="form-group">
-                    <label for="rumah_sakit">Rumah Sakit</label>
-                    <select class="form-control" id="rumah_sakit">
-                        <option>Harapan Kita</option>
-                        <option>Darmais</option>
-                        <option>Tarakan</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="poli">Poli</label>
-                    <select class="form-control" id="rumah_sakit">
-                        <option>Umum</option>
-                        <option>Jantung</option>
-                        <option>Kanker</option>
-                    </select>
-                </div>
-                <div class="form-group row">
-                    <label for="antrean" class="col-sm-2 col-form-label">No Antrean</label>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="21">
+						<h2>Informasi <b>Poli</b></h2>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Poli</th>
+                        <th style="width: 22%;">Nama Dokter</th>
+                        <th> Ruangan </th>
+                        <th> Jam Operasional </th>
+                    </tr>
+                </thead>
+                <?php
+                    $no = 1;
+                    foreach($poli as $u){
+                ?>
+                <tbody>
+                    <tr>
+                        <td> <?php echo $no++ ?> </td>
+                        <td> <?php echo $u->nama_poli ?> </td>
+                        <td> <?php echo $u->nama_dokter ?> </td>
+                        <td> <?php echo $u->ruangan ?> </td>
+                        <td> <?php echo $u->jam_operasional ?> </td>
+                    </tr>
+                </tbody>
+                <?php } ?>
+            </table>
+        </div>
+
+        <div class="table-wrapper">			
+            <div class="table-title">
+                <div class="row">
+					<div class="col-sm-6">
+						<h2>Reservation <b>Details</b></h2>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Pasien</th>
+                        <th style="width: 22%;">Rumah Sakit</th>
+                        <th>Poli</th>
+                        <th>Antrean</th>
+                    </tr>
+                </thead>
+                <?php
+                    $no = 1;
+                    foreach($antrean as $u){
+                ?>
+                <tbody>
+                    <tr>
+                        <td> <?php echo $no++ ?> </td>
+                        <td> <?php echo $u->nama_lengkap ?> </td>
+                        <td> <?php echo $u->nama_rs ?> </td>
+                        <td> <?php echo $u->poli ?> </td>
+                        <td> <?php echo $u->no_antrean ?> </td>
+                    </tr>
+                </tbody>
+                <?php } ?>
+            </table>
         </div>
     </div>     
 </body>

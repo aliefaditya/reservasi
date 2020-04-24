@@ -23,7 +23,6 @@
                 'nama_lengkap' => $nama_lengkap,
                 'umur' => $umur
                 );
-            echo $data['name'];
             $this->m_register->input_data($data,'user');
             redirect(base_url("login"));
         }
