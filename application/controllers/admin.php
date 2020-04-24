@@ -10,7 +10,9 @@
             $this->load->view('dashboard_admin',$data);
         }
         function antrean(){
+            $data['rumah_sakit'] = $this->m_admin->tampil_data_rs()->result();
             $data['antrean'] = $this->m_admin->tampil_data_antrean()->result();
+            $data['poli'] = $this->m_admin->tampil_data_poli()->result();
             $this->load->view('antrean',$data);
         }
         function rumah_sakit(){
@@ -37,5 +39,56 @@
             $this->m_admin->input_data($data,'user');
             redirect(base_url("admin"));
         }
+
+        function aksi_add_rs(){
+            $nama_rs = $this->input->post('nama_rs');
+            $alamat = $this->input->post('alamat');
+            $kota = $this->input->post('kota');
+            $jam_operasional = $this->input->post('jam_operasional');
+    
+            $data = array(
+                'nama_rs' => $nama_rs,
+                'alamat' => $alamat,
+                'kota' => $kota,
+                'jam_operasional' => $jam_operasional
+                );
+            $this->m_admin->input_data($data,'rumah_sakit');
+            redirect(base_url("admin/rumah_sakit"));
+        }
+
+        function aksi_add_poli(){
+            $nama_poli = $this->input->post('nama_poli');
+            $nama_dokter = $this->input->post('nama_dokter');
+            $ruangan = $this->input->post('ruangan');
+            $jam_operasional = $this->input->post('jam_operasional');
+    
+            $data = array(
+                'nama_poli' => $nama_poli,
+                'nama_dokter' => $nama_dokter,
+                'ruangan' => $ruangan,
+                'jam_operasional' => $jam_operasional
+                );
+            $this->m_admin->input_data($data,'poli');
+            redirect(base_url("admin/poli"));
+        }
+
+        function aksi_add_antrean(){
+            $nama_lengkap = $this->input->post('nama_lengkap');
+            $nama_rs = $this->input->post('nama_rs');
+            $poli = $this->input->post('poli');
+            $no_antrean = $this->input->post('no_antrean');
+    
+            $data = array(
+                'nama_lengkap' => $nama_lengkap,
+                'nama_rs' => $nama_rs,
+                'poli' => $poli,
+                'no_antrean' => $no_antrean
+                );
+            $this->m_admin->input_data($data,'antrean');
+            redirect(base_url("admin/antrean"));
+        }
+
+        
+
     }
 ?>

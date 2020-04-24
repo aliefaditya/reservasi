@@ -357,27 +357,27 @@
 		<div id="addEmployeeModal" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form>
+                    <form action="<?php echo base_url('admin/aksi_add_rs'); ?>" method="post">
 						<div class="modal-header">						
 							<h4 class="modal-title">Add Rumah Sakit</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">					
 							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control" required>
+								<label>Nama Rumah Sakit</label>
+								<input type="text" name="nama_rs" class="form-control" required>
 							</div>
 							<div class="form-group">
-								<label>Email</label>
-								<input type="email" class="form-control" required>
+								<label>Alamat</label>
+								<input type="text" name="alamat" class="form-control" required>
 							</div>
 							<div class="form-group">
-								<label>Address</label>
-								<textarea class="form-control" required></textarea>
+								<label>Kota</label>
+								<input type="text" name="kota" class="form-control" required>
 							</div>
 							<div class="form-group">
-								<label>Phone</label>
-								<input type="text" class="form-control" required>
+								<label>Jam Operasional</label>
+								<input type="text" name="jam_operasional" class="form-control" required>
 							</div>					
 						</div>
 						<div class="modal-footer">

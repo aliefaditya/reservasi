@@ -357,27 +357,37 @@
 		<div id="addEmployeeModal" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form>
+                    <form action="<?php echo base_url('admin/aksi_add_antrean'); ?>" method="post">
 						<div class="modal-header">						
 							<h4 class="modal-title">Add Antrean</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">					
 							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control" required>
+								<label>Nama Pasien</label>
+								<input type="text" name="nama_lengkap" class="form-control" required>
 							</div>
 							<div class="form-group">
-								<label>Email</label>
-								<input type="email" class="form-control" required>
+								<label>Rumah Sakit</label>
+								<select class="form-control" name="nama_rs" id="rumah_sakit" required>
+                                    <option value="">No Selected</option>
+                                    <?php foreach($rumah_sakit as $row):?>
+                                    <option value="<?php echo $row->nama_rs;?>"><?php echo $row->nama_rs;?></option>
+                                    <?php endforeach;?>
+                                </select>
 							</div>
 							<div class="form-group">
-								<label>Address</label>
-								<textarea class="form-control" required></textarea>
+								<label>Poli</label>
+								<select class="form-control" name="poli" id="poli" required>
+                                    <option value="">No Selected</option>
+                                    <?php foreach($poli as $row):?>
+                                    <option value="<?php echo $row->nama_poli;?>"><?php echo $row->nama_poli;?></option>
+                                    <?php endforeach;?>
+                                </select>
 							</div>
 							<div class="form-group">
-								<label>Phone</label>
-								<input type="text" class="form-control" required>
+								<label>Nomor Antrean</label>
+								<input type="number" name="no_antrean" class="form-control" required>
 							</div>					
 						</div>
 						<div class="modal-footer">
@@ -443,7 +453,55 @@
 					</form>
 				</div>
 			</div>
-		</div>
+        </div>
+        <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-3.3.1.js'?>"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+    
+                $('#rumah_sakit').change(function(){ 
+                    var id=$(this).val();
+                    $.ajax({
+                        url : "<?php echo site_url('informasi/get_sub_rs');?>",
+                        method : "POST",
+                        data : {id: id_rs},
+                        async : true,
+                        dataType : 'json',
+                        success: function(data){
+                            var html = '';
+                            var i;
+                            for(i=0; i<data.length; i++){
+                                html += '<option value='+data[i].id_rs+'>'+data[i].nama_rs+'</option>';
+                            }
+                            $('#rumah_sakit').html(html);
+                        }
+                    });
+                    return false;
+                }); 
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#poli').change(function(){ 
+                    var id=$(this).val();
+                    $.ajax({
+                        url : "<?php echo site_url('informasi/get_sub_poli');?>",
+                        method : "POST",
+                        data : {id: id_poli},
+                        async : true,
+                        dataType : 'json',
+                        success: function(data){
+                            var html = '';
+                            var i;
+                            for(i=0; i<data.length; i++){
+                                html += '<option value='+data[i].id_poli+'>'+data[i].nama_poli+'</option>';
+                            }
+                            $('#poli').html(html);
+                        }
+                    });
+                    return false;
+                }); 
+            });
+        </script>
 		<?php include('template/footer.php')?>
-	</body>
+    </body>
 </html>                                		                            
