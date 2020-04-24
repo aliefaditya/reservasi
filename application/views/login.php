@@ -264,7 +264,7 @@
 <body>
 	<div class="wrapper fadeInDown">
 		<div id="formContent">
-			<form action="<?php echo base_url('login/aksi_login'); ?>" method="post">	
+			<form action="<?php echo base_url('login/auth'); ?>" method="post">	
 				<br><br>	
 				<input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
 				<input type="password" id="password" class="fadeIn third" name="password" placeholder="password">

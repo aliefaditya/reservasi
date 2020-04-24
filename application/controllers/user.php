@@ -7,8 +7,17 @@
                 redirect(base_url("login"));
             }
         }
+        
         function index(){
-            $this->load->view('dashboard');
+            if($this->session->userdata('level')=='1'){
+                $this->load->view('dashboard_admin');
+            }
+        }
+
+        function user(){
+            if($this->session->userdata('level')=='0'){
+                $this->load->view('dashboard');
+            }
         }
     }
 ?>
