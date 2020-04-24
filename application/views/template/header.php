@@ -13,10 +13,10 @@
         <a class="nav-item nav-link" href="<?php echo base_url('informasi')?>">Informasi</a>
       <?php } ?>
       <?php if($this->session->userdata("level") == '1'){?>
-        <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('user')?>">User<span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Rumah Sakit</a>
-        <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Poli</a>
-        <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Antrean</a>
+        <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('admin')?>">User<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="<?php echo base_url('admin/rumah_sakit')?>">Rumah Sakit</a>
+        <a class="nav-item nav-link" href="<?php echo base_url('admin/poli')?>">Poli</a>
+        <a class="nav-item nav-link" href="<?php echo base_url('admin/antrean')?>">Antrean</a>
       <?php } ?>
       <a class="nav-item nav-link" href="<?php echo base_url('login/logout'); ?>">Logout</a>
     </div>

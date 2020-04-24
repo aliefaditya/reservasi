@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="<?php include('assets/css/footer.css')?>">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style type="text/css">
@@ -33,6 +34,13 @@
 			.position{
 					margin-left:16px;
 					margin-right:54%;
+			}
+			#sticky-footer {
+				flex-shrink: none;
+				position: fixed;
+				left: 0;
+				right: 0;
+				bottom: 0;
 			}
 			.table-title {        
 				padding-bottom: 15px;
@@ -255,13 +263,6 @@
 			.divider{
 				padding-top: 2%;
 			}
-			#sticky-footer {
-				flex-shrink: none;
-				position: fixed;
-				left: 0;
-				right: 0;
-				bottom: 0;
-			}
 		</style>
 		<script type="text/javascript">
 		$(document).ready(function(){
@@ -290,71 +291,159 @@
 		</script>
 	</head>
 	<body>
-		<!-- <img class="card-img-top" src="<?php echo base_url('/application/views/assets/gambar1.png')?>" alt="Card image cap"> -->
-		<?php include('template/header.php')?>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="position"> 
+            <a class="navbar-brand" href="#">Reservation</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">test</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="<?php echo base_url('admin')?>">User<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('admin/rumah_sakit')?>">Rumah Sakit</a>
+                <a class="nav-item nav-link" href="<?php echo base_url('admin/poli')?>">Poli</a>
+                <a class="nav-item nav-link" href="<?php echo base_url('admin/antrean')?>">Antrean</a>
+                <a class="nav-item nav-link" href="<?php echo base_url('login/logout'); ?>">Logout</a>
+            </div>
+        </div>
+        </nav>
 		<div class="container">
-			<h2> Hai, <?php echo $this->session->userdata("nama"); ?>.  </h2>
-			<h4> Nowadays, you would be able to reserve by Apps </h4>
-			<div class="card-deck jarak">
-				<div class="card">
-					<img class="card-img-top" src="<?php echo base_url('/application/views/assets/pict/002-mask.png')?>" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title text-center text-bold font-weight-bold">DISEASE</h5>
-					<br>
-					<p class="card-text">Tanggap penyakit berat dapat diawali dengan berobat secepatnya dan mendapatkan penanganan yang sangat cepat dari pihak rumah sakit.</p>
-					<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+			<div class="table-wrapper">
+				<div class="table-title">
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Manage <b>Rumah Sakit</b></h2>
+						</div>
+						<div class="col-sm-6">
+							<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Rumah Sakit</span></a>
+							<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+						</div>
 					</div>
 				</div>
-				<div class="card">
-					<img class="card-img-top" src="<?php echo base_url('/application/views/assets/pict/001-line.png')?>" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title text-center font-weight-bold">QUEUE HANDLING</h5>
-					<br>
-					<p class="card-text">Antre panjang tidak perlu dilakukan lagi dalam proses pengobatan yang efektif, agar calon pasien tidak menunggu dalam waktu yang lama.</p>
-					<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					</div>
-				</div>
-				<div class="card">
-					<img class="card-img-top" src="<?php echo base_url('/application/views/assets/pict/003-mobile-banking.png')?>" alt="Card image cap">
-					<div class="card-body">
-					<h5 class="card-title text-center font-weight-bold">RESERVATION</h5>
-					<br>
-					<p class="card-text">Reservasi untuk antrean dapat dilakukan melalui website secara online dan dapat mempermudah tanpa perlu antre panjang.</p>
-					<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					</div>
-				</div>
+				<table class="table table-striped table-hover">
+				<thead>
+						<tr>
+							<th>No</th>
+							<th>Nama Rumah Sakit</th>
+							<th style="width: 22%;">Alamat</th>
+							<th>Kota</th>
+							<th>Jam Operasional</th>
+							<th>Action</th> 
+						</tr>
+					</thead>
+					<?php
+						$no = 1;
+						foreach($rumah_sakit as $u){
+					?>
+					<tbody>
+						<tr>
+							<td> <?php echo $no++ ?> </td>
+							<td> <?php echo $u->nama_rs ?> </td>
+							<td> <?php echo $u->alamat ?> </td>
+							<td> <?php echo $u->kota ?> </td>
+							<td> <?php echo $u->jam_operasional ?> </td>
+							<td>
+                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            </td>
+						</tr>
+					</tbody>
+					<?php } ?>
+				</table>
 			</div>
-			<br>
-			<div class="jumbotron jumbotron-fluid">
-				<div class="container">
-					<h1 class="display-4">How it Works?</h1>
-					<p class="lead">Yuk kita lihat, bagaimana alur dari sistem ini.</p>
-				</div>
-			</div>
-			<hr class="my-4">
-			<h4><b> Sekarang antre untuk berobat lebih mudah dengan reservation website </b></h4>
-			<!-- Gambar 1 -->
-			<img src="<?php echo base_url('/application/views/assets/pict/002-note.png')?>" class="rounded float-left anotherImg" alt="...">
-			<p class="lead" href="#multiCollapseExample1" data-toggle="collapse" aria-controls="multiCollapseExample1"><br> Make it easier </p>
-			<p class="collapse multi-collapse" id="multiCollapseExample1">
-				Calon pasien dapat menggunakan platform ini sebagai alat untuk mempermudah registrasi secara online. <br> Tidak dipungut biaya lho, alias free!
-			</p>
-			<!-- Gambar 2 -->
-			<br><br><br><br>
-			<img src="<?php echo base_url('/application/views/assets/pict/003-hospital.png')?>" class="rounded float-left anotherImg">
-			<p class="lead" href="#multiCollapseExample2" data-toggle="collapse" aria-controls="multiCollapseExample2"><br> Data Integrity </p>
-			<p class="collapse multi-collapse" id="multiCollapseExample2">
-				Data anda akan tersimpan dengan baik oleh sistem yang terintegrasi langsung dengan pihak rumah sakit. <br>Data anda dijamin aman dan tidak disalahgunakan oleh pihakmanapun.  
-			</p>
-			<!-- Gambar 3 -->
-			<br><br><br><br>
-			<img src="<?php echo base_url('/application/views/assets/pict/001-customer.png')?>" class="rounded float-left anotherImg" alt="...">
-			<p class="lead" href="#multiCollapseExample3" data-toggle="collapse" aria-controls="multiCollapseExample3"><br> Customer Service </p>
-			<p class="collapse multi-collapse" id="multiCollapseExample3">
-				Tidak perlu khawatir jika terjadi masalah, administrator kami siap membantu kapanpun dan dimanapun <br>saat anda mengalami kesulitan.
-			</p>
 		</div>
-		<hr class="style1">
+		<!-- Edit Modal HTML -->
+		<div id="addEmployeeModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">						
+							<h4 class="modal-title">Add Rumah Sakit</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">					
+							<div class="form-group">
+								<label>Name</label>
+								<input type="text" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>Address</label>
+								<textarea class="form-control" required></textarea>
+							</div>
+							<div class="form-group">
+								<label>Phone</label>
+								<input type="text" class="form-control" required>
+							</div>					
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="submit" class="btn btn-success" value="Add">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Edit Modal HTML -->
+		<div id="editEmployeeModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">						
+							<h4 class="modal-title">Edit Rumah Sakit</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">					
+							<div class="form-group">
+								<label>Name</label>
+								<input type="text" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>Address</label>
+								<textarea class="form-control" required></textarea>
+							</div>
+							<div class="form-group">
+								<label>Phone</label>
+								<input type="text" class="form-control" required>
+							</div>					
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="submit" class="btn btn-info" value="Save">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Delete Modal HTML -->
+		<div id="deleteEmployeeModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">						
+							<h4 class="modal-title">Delete Rumah Sakit</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">					
+							<p>Are you sure you want to delete these Records?</p>
+							<p class="text-warning"><small>This action cannot be undone.</small></p>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="submit" class="btn btn-danger" value="Delete">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 		<?php include('template/footer.php')?>
 	</body>
 </html>                                		                            

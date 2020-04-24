@@ -12,14 +12,4 @@ class M_informasi extends CI_Model{
     function tampil_data_poli(){
         return $this->db->get('poli');
     }
-    /*
-
-    function tampil_data_poli(){
-        return $this->db->get('poli');
-    }
-
-    function tampil_data_antrean(){
-        return $this->db->get('antrean');
-    }*/
-
 }

@@ -118,7 +118,14 @@
     }
     table.table td i {
         font-size: 19px;
-    }    
+    }
+    #sticky-footer {
+		flex-shrink: none;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}    
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -152,10 +159,10 @@ $(document).ready(function(){
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-        <a class="nav-item nav-link" href="<?php echo base_url('user/user')?>">Home<span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('registrasi')?>">Registrasi</a>
-        <a class="nav-item nav-link" href="<?php echo base_url('informasi')?>">Informasi</a>
-        <a class="nav-item nav-link" href="<?php echo base_url('login/logout'); ?>">Logout</a>
+            <a class="nav-item nav-link" href="<?php echo base_url('user/user')?>">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('registrasi')?>">Registrasi</a>
+            <a class="nav-item nav-link" href="<?php echo base_url('informasi')?>">Informasi</a>
+            <a class="nav-item nav-link" href="<?php echo base_url('login/logout'); ?>">Logout</a>
         </div>
     </div>
     </nav>
@@ -296,6 +303,7 @@ $(document).ready(function(){
                 return false;
             }); 
         });
-    </script>     
+    </script>
+    <?php include('template/footer.css')?>     
 </body>
 </html>                                		                                                        
