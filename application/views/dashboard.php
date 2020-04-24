@@ -241,10 +241,19 @@
 				font-weight: normal;
 			}
 			img{
-				margin-right: 32px;
-				margin-left: 32px;
-				margin-top: 32px;
-				margin-bottom: 32px;
+				max-width: 42%;
+  				height: auto;
+				margin: 24px 96px;
+			}
+			.anotherImg{
+				max-width: 8%;
+			}
+			.jarak{
+				margin-top: 3%;
+				margin-bottom: 3%;
+			}
+			.divider{
+				padding-top: 2%;
 			}
 		</style>
 		<script type="text/javascript">
@@ -277,41 +286,68 @@
 		<!-- <img class="card-img-top" src="<?php echo base_url('/application/views/assets/gambar1.png')?>" alt="Card image cap"> -->
 		<?php include('template/header.php')?>
 		<div class="container">
-			<h2> Hai, <?php echo $this->session->userdata("nama"); ?>. </h2>
-			<h4> Reservation with Apps </h4>
-			<div class="card-group">
+			<h2> Hai, <?php echo $this->session->userdata("nama"); ?>.  </h2>
+			<h4> Nowadays, you would be able to reserve by Apps </h4>
+			<div class="card-deck jarak">
 				<div class="card">
 					<img class="card-img-top" src="<?php echo base_url('/application/views/assets/pict/002-mask.png')?>" alt="Card image cap">
 					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-					</div>
-					<div class="card-footer">
-					<small class="text-muted">Last updated 3 mins ago</small>
+					<h5 class="card-title text-center text-bold font-weight-bold">DISEASE</h5>
+					<br>
+					<p class="card-text">Tanggap penyakit berat dapat diawali dengan berobat secepatnya dan mendapatkan penanganan yang sangat cepat dari pihak rumah sakit.</p>
+					<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 					</div>
 				</div>
 				<div class="card">
 					<img class="card-img-top" src="<?php echo base_url('/application/views/assets/pict/001-line.png')?>" alt="Card image cap">
 					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-					</div>
-					<div class="card-footer">
-					<small class="text-muted">Last updated 3 mins ago</small>
+					<h5 class="card-title text-center font-weight-bold">QUEUE HANDLING</h5>
+					<br>
+					<p class="card-text">Antre panjang tidak perlu dilakukan lagi dalam proses pengobatan yang efektif, agar calon pasien tidak menunggu dalam waktu yang lama.</p>
+					<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 					</div>
 				</div>
 				<div class="card">
 					<img class="card-img-top" src="<?php echo base_url('/application/views/assets/pict/003-mobile-banking.png')?>" alt="Card image cap">
 					<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-					</div>
-					<div class="card-footer">
-					<small class="text-muted">Last updated 3 mins ago</small>
+					<h5 class="card-title text-center font-weight-bold">RESERVATION</h5>
+					<br>
+					<p class="card-text">Reservasi untuk antrean dapat dilakukan melalui website secara online dan dapat mempermudah tanpa perlu antre panjang.</p>
+					<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 					</div>
 				</div>
 			</div>
+			<br>
+			<div class="jumbotron jumbotron-fluid">
+				<div class="container">
+					<h1 class="display-4">How it Works?</h1>
+					<p class="lead">Yuk kita lihat, bagaimana alur dari sistem ini.</p>
+				</div>
+			</div>
+			<hr class="my-4">
+			<h4><b> Sekarang antre untuk berobat lebih mudah dengan reservation website </b></h4>
+			<!-- Gambar 1 -->
+			<img src="<?php echo base_url('/application/views/assets/pict/002-note.png')?>" class="rounded float-left anotherImg" alt="...">
+			<p class="lead" href="#multiCollapseExample1" data-toggle="collapse" aria-controls="multiCollapseExample1"><br> Make it easier </p>
+			<p class="collapse multi-collapse" id="multiCollapseExample1">
+				Calon pasien dapat menggunakan platform ini sebagai alat untuk mempermudah registrasi secara online. <br> Tidak dipungut biaya lho, alias free!
+			</p>
+			<!-- Gambar 2 -->
+			<br><br><br><br>
+			<img src="<?php echo base_url('/application/views/assets/pict/003-hospital.png')?>" class="rounded float-left anotherImg">
+			<p class="lead" href="#multiCollapseExample2" data-toggle="collapse" aria-controls="multiCollapseExample2"><br> Data Integrity </p>
+			<p class="collapse multi-collapse" id="multiCollapseExample2">
+				Data anda akan tersimpan dengan baik oleh sistem yang terintegrasi langsung dengan pihak rumah sakit. <br>Data anda dijamin aman dan tidak disalahgunakan oleh pihakmanapun.  
+			</p>
+			<!-- Gambar 3 -->
+			<br><br><br><br>
+			<img src="<?php echo base_url('/application/views/assets/pict/001-customer.png')?>" class="rounded float-left anotherImg" alt="...">
+			<p class="lead" href="#multiCollapseExample3" data-toggle="collapse" aria-controls="multiCollapseExample3"><br> Customer Service </p>
+			<p class="collapse multi-collapse" id="multiCollapseExample3">
+				Tidak perlu khawatir jika terjadi masalah, administrator kami siap membantu kapanpun dan dimanapun <br>saat anda mengalami kesulitan.
+			</p>
 		</div>
+		<hr class="style1">
 		<?php include('template/footer.php')?>
 	</body>
 </html>                                		                            
