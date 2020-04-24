@@ -7,10 +7,17 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('user')?>">Home<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Registrasi</a>
-      <a class="nav-item nav-link" href="<?php echo base_url('informasi')?>">Informasi</a>
-      <a class="nav-item nav-link" href="<?php echo base_url('about')?>">About</a>
+      <?php if($this->session->userdata("level")=='0'){ ?>
+        <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('user/user')?>">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Registrasi</a>
+        <a class="nav-item nav-link" href="<?php echo base_url('informasi')?>">Informasi</a>
+      <?php } ?>
+      <?php if($this->session->userdata("level") == '1'){?>
+        <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('user')?>">User<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Rumah Sakit</a>
+        <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Poli</a>
+        <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Antrean</a>
+      <?php } ?>
       <a class="nav-item nav-link" href="<?php echo base_url('login/logout'); ?>">Logout</a>
     </div>
   </div>

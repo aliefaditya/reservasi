@@ -152,10 +152,9 @@ $(document).ready(function(){
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-        <a class="nav-item nav-link" href="<?php echo base_url('user')?>">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="<?php echo base_url('user/user')?>">Home<span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" href="<?php echo base_url('registrasi')?>">Registrasi</a>
         <a class="nav-item nav-link active ml-auto" href="<?php echo base_url('informasi')?>">Informasi</a>
-        <a class="nav-item nav-link" href="#">About</a>
         <a class="nav-item nav-link" href="<?php echo base_url('login/logout'); ?>">Logout</a>
         </div>
     </div>
