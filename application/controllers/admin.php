@@ -87,13 +87,13 @@
             $this->m_admin->input_data($data,'antrean');
             redirect(base_url("admin/antrean"));
         }
-
+        /*
         function hapus_user($id_user){
             $where = array('id_user' => $id_user);
             $this->m_admin->hapus_user($where,'user');
             redirect('admin');
         }
-        /*
+        
         function edit_user($id_user){
             $where = array('id_user' => $id_user);
             $data['user'] = $this->m_admin->edit_data_user($where,'user')->result();
@@ -123,6 +123,17 @@
             );
         
             $this->m_admin->update_data($where,$data,'user');
+            redirect('admin');
+        }
+
+        function hapus_user(){
+            $id_user=$this->input->post('id_user');
+            $this->m_admin->hapus_user($id_user);
+            redirect('admin');
+        }
+
+        function delete_all_data(){
+            $this->m_admin->delete_all_data_user();
             redirect('admin');
         }
 

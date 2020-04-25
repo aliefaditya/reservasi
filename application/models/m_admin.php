@@ -28,5 +28,15 @@ class M_admin extends CI_Model{
     function update_data($where,$data,$table){
 		$this->db->where($where);
 		$this->db->update($table,$data);
-	}
+    }
+    
+    function hapus_user($id_user){
+        $result=$this->db->query("DELETE FROM user WHERE id_user='$id_user'");
+        return $result;
+    }
+
+    function delete_all_data_user(){
+        $result=$this->db->query("DELETE FROM user");
+        return $result;
+    }
 }
