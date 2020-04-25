@@ -171,7 +171,7 @@
             $this->m_admin->update_data($where,$data,'rumah_sakit');
             redirect('admin/rumah_sakit');
         }
-
+        
         function update_antrean(){
             $id_antrean = $this->input->post('id_antrean');
             $nama_lengkap = $this->input->post('nama_lengkap');

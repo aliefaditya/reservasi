@@ -408,7 +408,8 @@
 							<h4 class="modal-title">Edit Antrean</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
-						<div class="modal-body">					
+						<div class="modal-body">	
+                            <input type="hidden" name="id_antrean" value="<?php echo $u->id_antrean ?>">				
 							<div class="form-group">
 								<label>Nama Pasien</label>
 								<input type="text" name="nama_lengkap" class="form-control" value="<?php echo $u->nama_lengkap ?>" required>
