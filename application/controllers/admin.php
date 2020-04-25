@@ -126,15 +126,117 @@
             redirect('admin');
         }
 
+        function update_poli(){
+            $id_poli = $this->input->post('id_poli');
+            $nama_poli = $this->input->post('nama_poli');
+            $nama_dokter = $this->input->post('nama_dokter');
+            $ruangan = $this->input->post('ruangan');
+            $jam_operasional = $this->input->post('jam_operasional');
+
+            $data = array(
+                'id_poli' => $id_poli,
+                'nama_poli' => $nama_poli,
+                'nama_dokter' => $nama_dokter,
+                'ruangan' => $ruangan,
+                'jam_operasional' => $jam_operasional
+            );
+        
+            $where = array(
+                'id_poli' => $id_poli
+            );
+        
+            $this->m_admin->update_data($where,$data,'poli');
+            redirect('admin/poli');
+        }
+
+        function update_rs(){
+            $id_rs = $this->input->post('id_rs');
+            $nama_rs = $this->input->post('nama_rs');
+            $alamat = $this->input->post('alamat');
+            $kota = $this->input->post('kota');
+            $jam_operasional = $this->input->post('jam_operasional');
+
+            $data = array(
+                'id_rs' => $id_rs,
+                'nama_rs' => $nama_rs,
+                'alamat' => $alamat,
+                'kota' => $kota,
+                'jam_operasional' => $jam_operasional
+            );
+        
+            $where = array(
+                'id_rs' => $id_rs
+            );
+        
+            $this->m_admin->update_data($where,$data,'rumah_sakit');
+            redirect('admin/rumah_sakit');
+        }
+
+        function update_antrean(){
+            $id_antrean = $this->input->post('id_antrean');
+            $nama_lengkap = $this->input->post('nama_lengkap');
+            $nama_rs = $this->input->post('nama_rs');
+            $poli = $this->input->post('poli');
+            $no_antrean = $this->input->post('no_antrean');
+
+            $data = array(
+                'id_antrean' => $id_antrean,
+                'nama_lengkap' => $nama_lengkap,
+                'nama_rs' => $nama_rs,
+                'poli' => $poli,
+                'no_antrean' => $no_antrean
+            );
+        
+            $where = array(
+                'id_antrean' => $id_antrean
+            );
+        
+            $this->m_admin->update_data($where,$data,'antrean');
+            redirect('admin/antrean');
+        }
+
         function hapus_user(){
             $id_user=$this->input->post('id_user');
             $this->m_admin->hapus_user($id_user);
             redirect('admin');
         }
 
+        function hapus_rs(){
+            $id_rs=$this->input->post('id_rs');
+            $this->m_admin->hapus_rs($id_rs);
+            redirect('admin/rumah_sakit');
+        }
+
+        function hapus_poli(){
+            $id_poli=$this->input->post('id_poli');
+            $this->m_admin->hapus_poli($id_poli);
+            redirect('admin/poli');
+        }
+
+        function hapus_antrean(){
+            $id_antrean=$this->input->post('id_antrean');
+            $this->m_admin->hapus_antrean($id_antrean);
+            redirect('admin/antrean');
+        }
+
         function delete_all_data(){
             $this->m_admin->delete_all_data_user();
             redirect('admin');
+        }
+
+        function delete_all_data_rs(){
+            $this->m_admin->delete_all_data_rs();
+            redirect('admin/rumah_sakit');
+        }
+
+        function delete_all_data_poli(){
+            $this->m_admin->delete_all_data_poli();
+            redirect('admin/poli');
+        }
+
+        function delete_all_data_antrean(){
+            $this->m_admin->delete_all_data_antrean();
+            redirect('admin/antrean');
         }
 
     }

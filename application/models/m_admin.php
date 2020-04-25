@@ -35,8 +35,38 @@ class M_admin extends CI_Model{
         return $result;
     }
 
+    function hapus_rs($id_rs){
+        $result=$this->db->query("DELETE FROM rumah_sakit WHERE id_rs='$id_rs'");
+        return $result;
+    }
+
+    function hapus_poli($id_poli){
+        $result=$this->db->query("DELETE FROM poli WHERE id_poli='$id_poli'");
+        return $result;
+    }
+
+    function hapus_antrean($id_antrean){
+        $result=$this->db->query("DELETE FROM antrean WHERE id_antrean='$id_antrean'");
+        return $result;
+    }
+
     function delete_all_data_user(){
         $result=$this->db->query("DELETE FROM user");
+        return $result;
+    }
+
+    function delete_all_data_rs(){
+        $result=$this->db->query("DELETE FROM rumah_sakit");
+        return $result;
+    }
+
+    function delete_all_data_poli(){
+        $result=$this->db->query("DELETE FROM poli");
+        return $result;
+    }
+
+    function delete_all_data_antrean(){
+        $result=$this->db->query("DELETE FROM antrean");
         return $result;
     }
 }

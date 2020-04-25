@@ -316,9 +316,9 @@
 							<h2>Manage <b>Poli</b></h2>
 						</div>
 						<div class="col-sm-6">
-							<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Poli</span></a>
-							<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
-						</div>
+							<a href="#deleteEmployeeModalWhole" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Poli</span></a>
+                        </div>
 					</div>
 				</div>
 				<table class="table table-striped table-hover">
@@ -344,8 +344,8 @@
 							<td> <?php echo $u->ruangan ?> </td>
 							<td> <?php echo $u->jam_operasional ?> </td>
 							<td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="#editEmployeeModal<?php echo $u->id_poli;?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteEmployeeModal<?php echo $u->id_poli;?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
 						</tr>
 					</tbody>
@@ -353,7 +353,7 @@
 				</table>
 			</div>
 		</div>
-		<!-- Edit Modal HTML -->
+		<!-- Add Modal HTML -->
 		<div id="addEmployeeModal" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -389,51 +389,78 @@
 			</div>
 		</div>
 		<!-- Edit Modal HTML -->
-		<div id="editEmployeeModal" class="modal fade">
+		<?php foreach($poli as $u){?>
+		<div id="editEmployeeModal<?php echo $u->id_poli;?>" class="modal fade" tabindex="-1">
 			<div class="modal-dialog">
-				<div class="modal-content">
-					<form>
+			<div class="modal-content">
+					<form action="<?php echo base_url('admin/update_poli'); ?>" method="post">
 						<div class="modal-header">						
 							<h4 class="modal-title">Edit Poli</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
-						<div class="modal-body">					
+						<div class="modal-body">	
+                            <input type="hidden" name="id_poli" value="<?php echo $u->id_poli ?>">				
 							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control" required>
+								<label>Poli</label>
+								<input type="text" name="nama_poli" class="form-control" value="<?php echo $u->nama_poli ?>" required>
+                            </div>
+                            <div class="form-group">
+								<label>Dokter</label>
+								<input type="text" name="nama_dokter" class="form-control" value="<?php echo $u->nama_dokter ?>" required>
 							</div>
 							<div class="form-group">
-								<label>Email</label>
-								<input type="email" class="form-control" required>
+								<label>Ruangan</label>
+								<input type="text" name="ruangan" class="form-control" value="<?php echo $u->ruangan ?>" required>
 							</div>
 							<div class="form-group">
-								<label>Address</label>
-								<textarea class="form-control" required></textarea>
+								<label>Jam Operasional</label>
+								<input type="text" name="jam_operasional" class="form-control" value="<?php echo $u->jam_operasional ?>" required>
 							</div>
-							<div class="form-group">
-								<label>Phone</label>
-								<input type="text" class="form-control" required>
-							</div>					
 						</div>
 						<div class="modal-footer">
 							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-							<input type="submit" class="btn btn-info" value="Save">
+							<input type="submit" class="btn btn-success" value="Update">
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-		<!-- Delete Modal HTML -->
-		<div id="deleteEmployeeModal" class="modal fade">
+		<?php }?>
+		<!-- Delete Modal by ID HTML -->
+		<?php foreach($poli as $u){?>
+		<div id="deleteEmployeeModal<?php echo $u->id_poli;?>" class="modal fade" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form>
+					<form action="<?php echo base_url('admin/hapus_poli');?>" method="post">
+						<input type="hidden" name="id_poli" value="<?php echo $u->id_poli ?>">
+						<div class="modal-header">
+							<h4 class="modal-title">Delete Poli</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p>Are you sure you want to delete Poli <b><?php echo $u->nama_poli;?>?</b></p>
+							<p class="text-warning"><small>This action cannot be undone.</small></p>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="submit" class="btn btn-danger" value="Delete">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<?php }?>
+        <!-- Delete Modal HTML -->
+		<div id="deleteEmployeeModalWhole" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+                    <form action="<?php echo base_url('admin/delete_all_data_poli');?>" method="post">
 						<div class="modal-header">						
 							<h4 class="modal-title">Delete Poli</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">					
-							<p>Are you sure you want to delete these Records?</p>
+							<p>Are you sure you want to delete these records?</b></p>
 							<p class="text-warning"><small>This action cannot be undone.</small></p>
 						</div>
 						<div class="modal-footer">

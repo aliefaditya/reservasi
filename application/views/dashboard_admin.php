@@ -309,7 +309,6 @@
 				<thead>
 						<tr>
 							<th>No</th>
-							<th> ID </th>
 							<th>Nama Lengkap</th>
 							<th style="width: 22%;">Umur</th>
 							<th>Username</th>
@@ -324,7 +323,6 @@
 					<tbody>
 						<tr>
 							<td> <?php echo $no++ ?> </td>
-							<td> <?php echo $u->id_user ?> </td>
 							<td> <?php echo $u->nama_lengkap ?> </td>
 							<td> <?php echo $u->umur ?> </td>
 							<td> <?php echo $u->username ?> </td>

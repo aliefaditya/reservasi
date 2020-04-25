@@ -316,8 +316,8 @@
 							<h2>Manage <b>Rumah Sakit</b></h2>
 						</div>
 						<div class="col-sm-6">
-							<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Rumah Sakit</span></a>
-							<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                            <a href="#deleteEmployeeModalWhole" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Rumah Sakit</span></a>						
 						</div>
 					</div>
 				</div>
@@ -344,8 +344,8 @@
 							<td> <?php echo $u->kota ?> </td>
 							<td> <?php echo $u->jam_operasional ?> </td>
 							<td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="#editEmployeeModal<?php echo $u->id_rs;?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#deleteEmployeeModal<?php echo $u->id_rs;?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
 						</tr>
 					</tbody>
@@ -353,7 +353,7 @@
 				</table>
 			</div>
 		</div>
-		<!-- Edit Modal HTML -->
+		<!-- Add Modal HTML -->
 		<div id="addEmployeeModal" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -389,51 +389,76 @@
 			</div>
 		</div>
 		<!-- Edit Modal HTML -->
-		<div id="editEmployeeModal" class="modal fade">
+		<?php foreach($rumah_sakit as $u){?>
+		<div id="editEmployeeModal<?php echo $u->id_rs;?>" class="modal fade" tabindex="-1">
 			<div class="modal-dialog">
-				<div class="modal-content">
-					<form>
+			<div class="modal-content">
+					<form action="<?php echo base_url('admin/update_rs'); ?>" method="post">
 						<div class="modal-header">						
 							<h4 class="modal-title">Edit Rumah Sakit</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">					
 							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control" required>
+								<label>Rumah Sakit</label>
+								<input type="hidden" name="id_rs" value="<?php echo $u->id_rs ?>">
+								<input type="text" name="nama_rs" class="form-control" value="<?php echo $u->nama_rs ?>" required>
+                            </div>
+                            <div class="form-group">
+								<label>Alamat</label>
+								<input type="text" name="alamat" class="form-control" value="<?php echo $u->alamat ?>" required>
 							</div>
 							<div class="form-group">
-								<label>Email</label>
-								<input type="email" class="form-control" required>
+								<label>Kota</label>
+								<input type="text" name="kota" class="form-control" value="<?php echo $u->kota ?>" required>
 							</div>
 							<div class="form-group">
-								<label>Address</label>
-								<textarea class="form-control" required></textarea>
+								<label>Jam Operasional</label>
+								<input type="text" name="jam_operasional" class="form-control" value="<?php echo $u->jam_operasional ?>" required>
 							</div>
-							<div class="form-group">
-								<label>Phone</label>
-								<input type="text" class="form-control" required>
-							</div>					
 						</div>
 						<div class="modal-footer">
 							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-							<input type="submit" class="btn btn-info" value="Save">
+							<input type="submit" class="btn btn-success" value="Update">
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-		<!-- Delete Modal HTML -->
-		<div id="deleteEmployeeModal" class="modal fade">
+		<?php }?>
+		<!-- Delete Modal by ID HTML -->
+		<div id="deleteEmployeeModal<?php echo $u->id_rs;?>" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form>
+                <form action="<?php echo base_url('admin/hapus_rs');?>" method="post">
+						<input type="hidden" name="id_rs" value="<?php echo $u->id_rs ?>">
+						<div class="modal-header">
+							<h4 class="modal-title">Delete Rumah Sakit</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p>Are you sure you want to delete <b><?php echo $u->nama_rs;?>?</b></p>
+							<p class="text-warning"><small>This action cannot be undone.</small></p>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="submit" class="btn btn-danger" value="Delete">
+						</div>
+					</form>
+				</div>
+			</div>
+        </div>
+        <!-- Delete Modal HTML -->
+		<div id="deleteEmployeeModalWhole" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+                    <form action="<?php echo base_url('admin/delete_all_data_rs');?>" method="post">
 						<div class="modal-header">						
 							<h4 class="modal-title">Delete Rumah Sakit</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">					
-							<p>Are you sure you want to delete these Records?</p>
+							<p>Are you sure you want to delete these records?</b></p>
 							<p class="text-warning"><small>This action cannot be undone.</small></p>
 						</div>
 						<div class="modal-footer">
