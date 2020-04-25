@@ -301,8 +301,8 @@
 							<h2>Manage <b>User</b></h2>
 						</div>
 						<div class="col-sm-6">
-							<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add User</span></a>
 							<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+							<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add User</span></a>
 						</div>
 					</div>
 				</div>
@@ -310,6 +310,7 @@
 				<thead>
 						<tr>
 							<th>No</th>
+							<th> ID </th>
 							<th>Nama Lengkap</th>
 							<th style="width: 22%;">Umur</th>
 							<th>Username</th>
@@ -324,21 +325,22 @@
 					<tbody>
 						<tr>
 							<td> <?php echo $no++ ?> </td>
+							<td> <?php echo $u->id_user ?> </td>
 							<td> <?php echo $u->nama_lengkap ?> </td>
 							<td> <?php echo $u->umur ?> </td>
 							<td> <?php echo $u->username ?> </td>
 							<td> <?php echo $u->password ?> </td>
 							<td>
-                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                            </td>
+								<a href="#editEmployeeModal<?php echo $u->id_user;?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+							</td>
 						</tr>
 					</tbody>
 					<?php } ?>
 				</table>
 			</div>
 		</div>
-		<!-- Edit Modal HTML -->
+		<!-- Add Modal HTML -->
 		<div id="addEmployeeModal" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -374,40 +376,43 @@
 			</div>
 		</div>
 		<!-- Edit Modal HTML -->
-		<div id="editEmployeeModal" class="modal fade">
+		<?php foreach($user as $u){?>
+		<div id="editEmployeeModal<?php echo $u->id_user;?>" class="modal fade" tabindex="-1">
 			<div class="modal-dialog">
-				<div class="modal-content">
-					<form>
+			<div class="modal-content">
+					<form action="<?php echo base_url('admin/update_user'); ?>" method="post">
 						<div class="modal-header">						
 							<h4 class="modal-title">Edit User</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">					
 							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control" required>
+								<label>Nama Lengkap</label>
+								<input type="hidden" name="id_user" value="<?php echo $u->id_user ?>">
+								<input type="text" name="nama_lengkap" class="form-control" value="<?php echo $u->nama_lengkap ?>" required>
 							</div>
 							<div class="form-group">
-								<label>Email</label>
-								<input type="email" class="form-control" required>
+								<label>Umur</label>
+								<input type="number" name="umur" class="form-control" value="<?php echo $u->umur ?>" required>
 							</div>
 							<div class="form-group">
-								<label>Address</label>
-								<textarea class="form-control" required></textarea>
+								<label>Username</label>
+								<input type="text" name="username" class="form-control" value="<?php echo $u->username ?>" required>
 							</div>
 							<div class="form-group">
-								<label>Phone</label>
-								<input type="text" class="form-control" required>
-							</div>					
+								<label>Password</label>
+								<input type="password" name="password" class="form-control" value="<?php echo $u->password ?>" required>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-							<input type="submit" class="btn btn-info" value="Save">
+							<input type="submit" class="btn btn-success" value="Update">
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
+		<?php }?>
 		<!-- Delete Modal HTML -->
 		<div id="deleteEmployeeModal" class="modal fade">
 			<div class="modal-dialog">

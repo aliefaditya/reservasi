@@ -88,7 +88,43 @@
             redirect(base_url("admin/antrean"));
         }
 
+        function hapus_user($id_user){
+            $where = array('id_user' => $id_user);
+            $this->m_admin->hapus_user($where,'user');
+            redirect('admin');
+        }
+        /*
+        function edit_user($id_user){
+            $where = array('id_user' => $id_user);
+            $data['user'] = $this->m_admin->edit_data_user($where,'user')->result();
+            $this->load->view('dashboard_admin',$data);
+        }
+        */
         
+
+        function update_user(){
+            //nama_lengkap, umur, username, password
+            $id_user = $this->input->post('id_user');
+            $nama_lengkap = $this->input->post('nama_lengkap');
+            $umur = $this->input->post('umur');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            $data = array(
+                'id_user' => $id_user,
+                'nama_lengkap' => $nama_lengkap,
+                'umur' => $umur,
+                'username' => $username,
+                'password' => $password
+            );
+        
+            $where = array(
+                'id_user' => $id_user
+            );
+        
+            $this->m_admin->update_data($where,$data,'user');
+            redirect('admin');
+        }
 
     }
 ?>

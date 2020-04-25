@@ -9,5 +9,9 @@
             $this->db->where('password',$password);
             return $this->db->get('user');
         }
+
+        function edit_data_user($where,$table){
+            return $this->db->get_where($table,$where);
+        }
     }
 ?>
